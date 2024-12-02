@@ -18,12 +18,13 @@ for player1 in players:
         first_player_moves = [move[0] for move in moves]  # Extract only the first player's moves
         opponent_moves = [move[1] for move in moves]  # Extract only the opponent's moves
         cooperations = iu.compute_cooperations(moves)
-        next_move = first_player_moves[-1] if first_player_moves else None  # Extract the last move of the first player
         match_data.append({
             'Players': f"{player1.__class__.__name__} vs {player2.__class__.__name__}",
             'Moves': first_player_moves[:-1],  # Exclude the last move
             'Opponent Moves': opponent_moves[:-1],
-            'Next Move': next_move,
+            'Next Move': first_player_moves[-1] if first_player_moves else None,
+            'Opponent Next Move': opponent_moves[-1] if opponent_moves else None,
+            'Next Pair of moves': moves[-1],
             'Cooperation Rate': cooperations[0]/len(moves),
             'Opponent Cooperation Rate': cooperations[1]/len(moves)
         })
@@ -53,5 +54,5 @@ def copied_opponent_last_move(row):
 match_table_df['Copy Rate'] = match_table_df.apply(copied_opponent_last_move, axis=1)
 
 #Save data as training and target csv files
-match_table_df.drop(columns=['Moves', 'Opponent Moves','Next Move']).to_csv('training.csv')
-match_table_df['Next Move'].to_csv('target.csv')
+match_table_df.drop(columns=['Players','Moves', 'Opponent Moves','Next Move','Next Pair of moves', 'Opponent Next Move']).to_csv('training.csv', index=False)
+match_table_df[['Next Move', 'Opponent Next Move']].to_csv('target.csv', index=False)
