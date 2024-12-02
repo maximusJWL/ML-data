@@ -47,7 +47,7 @@ def copied_opponent_last_move(row):
     for i in range(1, len(moves)):
         if moves[i] == opponent_moves[i-1]:  # Player copied the opponent's last move
             copied_count += 1
-    return copied_count / len(moves) if len(moves) > 0 else None
+    return copied_count / (len(moves)-1) if len(moves) > 0 else None
 
 # Apply the function to calculate the copy rate
 match_table_df['Copy Rate'] = match_table_df.apply(copied_opponent_last_move, axis=1)
