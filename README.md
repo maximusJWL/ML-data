@@ -6,3 +6,7 @@ It uses the axelrod python library, which is the main point of interest for rese
 The repo can be found at: https://github.com/Axelrod-Python/Axelrod
 
 Data was created using '/data creation.py', then '/alpha_to_numeric.py' to convert outputs of C and D to 1 and 0, as required for application to my machine learning models
+
+Data used in my coursework (for access by academic staff):
+  training_binary.csv
+  test_binary.csv
