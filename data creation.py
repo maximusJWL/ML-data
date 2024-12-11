@@ -1,10 +1,8 @@
 import axelrod as axl
 import axelrod.interaction_utils as iu
 import pandas as pd
-import types
 
-# Create a list of players (strategies)
-players = [s() for s in list(axl.basic_strategies) if not isinstance(s, types.GeneratorType)]
+players = [s() for s in axl.strategies]
 
 # Initialize an empty list to store match data
 match_data = []
@@ -56,3 +54,14 @@ match_table_df['Copy Rate'] = match_table_df.apply(copied_opponent_last_move, ax
 #Save data as training and target csv files
 match_table_df.drop(columns=['Players','Moves', 'Opponent Moves','Next Move','Next Pair of moves', 'Opponent Next Move']).to_csv('training.csv', index=False)
 match_table_df[['Next Move', 'Opponent Next Move']].to_csv('target.csv', index=False)
+
+'''
+@misc{axelrodproject,
+  author       = {{ {The Axelrod project developers} }},
+  title        = {Axelrod: v4.12.0},
+  month        = dec,
+  year         = 2024,
+  doi          = {10.5281/zenodo.7861907},
+  url          = {http://dx.doi.org/10.5281/zenodo.7861907}
+}
+'''
